@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  AdvMemo;
 
 type
   Tfrmcompilador = class(TForm)
@@ -18,6 +19,7 @@ type
     btcompilar: TSpeedButton;
     btgerarcodigo: TSpeedButton;
     btequipe: TSpeedButton;
+    AdvMemo1: TAdvMemo;
   private
     { Private declarations }
   public
