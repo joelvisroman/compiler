@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  AdvMemo;
+  AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl;
 
 type
   Tfrmcompilador = class(TForm)
@@ -20,6 +20,9 @@ type
     btgerarcodigo: TSpeedButton;
     btequipe: TSpeedButton;
     AdvMemo1: TAdvMemo;
+    Splitter1: TSplitter;
+    StatusBar1: TStatusBar;
+    AdvMemo2: TAdvMemo;
   private
     { Private declarations }
   public
