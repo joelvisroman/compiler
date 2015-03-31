@@ -12,6 +12,7 @@ object frmcompilador: Tfrmcompilador
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
@@ -44,7 +45,7 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = novo
       Align = alLeft
       Caption = 'novo [ctrl-n]'
       Font.Charset = ANSI_CHARSET
@@ -121,9 +122,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = abrir
       Align = alLeft
-      Caption = 'abir [ctrl-a]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -199,9 +199,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = salvar
       Align = alLeft
-      Caption = 'salvar [ctrl-s]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -268,8 +267,8 @@ object frmcompilador: Tfrmcompilador
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 181
-      ExplicitHeight = 69
+      ExplicitLeft = 207
+      ExplicitTop = -4
     end
     object btcopiar: TSpeedButton
       Left = 301
@@ -277,9 +276,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = copiar
       Align = alLeft
-      Caption = 'copiar [ctrl-c]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -355,9 +353,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = colar
       Align = alLeft
-      Caption = 'colar [ctrl-v]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -433,9 +430,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = recortar
       Align = alLeft
-      Caption = 'recortar [ctrl-x]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -511,9 +507,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = compilar
       Align = alLeft
-      Caption = 'compilar [F8]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -589,9 +584,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = gerar
       Align = alLeft
-      Caption = 'gerar c'#243'digo [F9]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -667,9 +661,8 @@ object frmcompilador: Tfrmcompilador
       Width = 100
       Height = 80
       Cursor = crHandPoint
-      Hint = '[tecla INSERT] Adicionar novo registro'
+      Action = equipe
       Align = alLeft
-      Caption = 'equipe [F1]'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -736,7 +729,6 @@ object frmcompilador: Tfrmcompilador
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      OnClick = btequipeClick
       ExplicitLeft = 741
       ExplicitTop = 0
       ExplicitHeight = 61
@@ -749,7 +741,7 @@ object frmcompilador: Tfrmcompilador
     Height = 19
     Panels = <>
   end
-  object syneditor: TSynEdit
+  object synEditor: TSynEdit
     Left = 0
     Top = 82
     Width = 903
@@ -769,9 +761,8 @@ object frmcompilador: Tfrmcompilador
     Gutter.Font.Style = []
     Gutter.ShowLineNumbers = True
     FontSmoothing = fsmNone
-    ExplicitHeight = 247
   end
-  object synmensagem: TSynEdit
+  object synMensagens: TSynEdit
     Left = 0
     Top = 379
     Width = 903
@@ -792,6 +783,54 @@ object frmcompilador: Tfrmcompilador
     Gutter.Width = 0
     ReadOnly = True
     FontSmoothing = fsmNone
-    ExplicitTop = 378
+  end
+  object actAcoes: TActionList
+    Left = 472
+    Top = 208
+    object novo: TAction
+      Caption = 'novo [ctrl+n]'
+      ShortCut = 16462
+      OnExecute = novoExecute
+    end
+    object abrir: TAction
+      Caption = 'abir [ctrl-a]'
+      ShortCut = 16449
+      OnExecute = abrirExecute
+    end
+    object salvar: TAction
+      Caption = 'salvar [ctrl-s]'
+      ShortCut = 16467
+      OnExecute = salvarExecute
+    end
+    object copiar: TAction
+      Caption = 'copiar [ctrl-c]'
+      ShortCut = 16451
+      OnExecute = copiarExecute
+    end
+    object colar: TAction
+      Caption = 'colar [ctrl-v]'
+      ShortCut = 16470
+      OnExecute = colarExecute
+    end
+    object recortar: TAction
+      Caption = 'recortar [ctrl-x]'
+      ShortCut = 16472
+      OnExecute = recortarExecute
+    end
+    object compilar: TAction
+      Caption = 'compilar [F8]'
+      ShortCut = 119
+      OnExecute = compilarExecute
+    end
+    object gerar: TAction
+      Caption = 'gerar c'#243'digo [F9]'
+      ShortCut = 120
+      OnExecute = gerarExecute
+    end
+    object equipe: TAction
+      Caption = 'equipe [F1]'
+      ShortCut = 112
+      OnExecute = equipeExecute
+    end
   end
 end
