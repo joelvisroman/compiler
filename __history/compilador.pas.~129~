@@ -1,0 +1,65 @@
+unit compilador;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl, SynEdit, Vcl.ImgList,
+  System.Actions, Vcl.ActnList;
+
+type
+  Tfrmcompilador = class(TForm)
+    W7Panel1: TPanel;
+    btnovo: TSpeedButton;
+    btabrir: TSpeedButton;
+    btsalvar: TSpeedButton;
+    btcopiar: TSpeedButton;
+    btcolar: TSpeedButton;
+    btrecortar: TSpeedButton;
+    btcompilar: TSpeedButton;
+    btgerarcodigo: TSpeedButton;
+    btequipe: TSpeedButton;
+    Splitter1: TSplitter;
+    StatusBar1: TStatusBar;
+    syneditor: TSynEdit;
+    synmensagem: TSynEdit;
+    actlmenu: TActionList;
+    actFileNew: TAction;
+    actFileOpen: TAction;
+    actFileCloseAll: TAction;
+    actFileExit: TAction;
+    actViewStatusbar: TAction;
+    actUpdateStatusBarPanels: TAction;
+    procedure btequipeClick(Sender: TObject);
+    procedure actFileNewExecute(Sender: TObject);
+    procedure btnovoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmcompilador: Tfrmcompilador;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrmcompilador.actFileNewExecute(Sender: TObject);
+begin
+  ShowMessage('teste');
+end;
+
+procedure Tfrmcompilador.btequipeClick(Sender: TObject);
+begin
+  synmensagem.Text := 'Joelvis Roman da Silva';
+end;
+
+procedure Tfrmcompilador.btnovoClick(Sender: TObject);
+begin
+  actlmenu.OnExecute(actFileNew,true);
+end;
+
+end.

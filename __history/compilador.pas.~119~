@@ -1,0 +1,87 @@
+unit compilador;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl, SynEdit, Vcl.ImgList,
+  System.Actions, Vcl.ActnList;
+
+type
+  Tfrmcompilador = class(TForm)
+    W7Panel1: TPanel;
+    btnovo: TSpeedButton;
+    btabrir: TSpeedButton;
+    btsalvar: TSpeedButton;
+    btcopiar: TSpeedButton;
+    btcolar: TSpeedButton;
+    btrecortar: TSpeedButton;
+    btcompilar: TSpeedButton;
+    btgerarcodigo: TSpeedButton;
+    btequipe: TSpeedButton;
+    Splitter1: TSplitter;
+    StatusBar1: TStatusBar;
+    syneditor: TSynEdit;
+    synmensagem: TSynEdit;
+    MainMenu1: TMainMenu;
+    Arquivo1: TMenuItem;
+    MmNovo: TMenuItem;
+    Abrir1: TMenuItem;
+    Salvar1: TMenuItem;
+    SalvarComo1: TMenuItem;
+    Imprimir1: TMenuItem;
+    Sair1: TMenuItem;
+    Sair2: TMenuItem;
+    Editar1: TMenuItem;
+    Recortar1: TMenuItem;
+    Copiar1: TMenuItem;
+    Colar1: TMenuItem;
+    N2: TMenuItem;
+    Selecionartudo1: TMenuItem;
+    Desfazer1: TMenuItem;
+    N1: TMenuItem;
+    FormatarFonte1: TMenuItem;
+    Fonte1: TMenuItem;
+    Cor1: TMenuItem;
+    Negrito1: TMenuItem;
+    Italico1: TMenuItem;
+    Sublinhado1: TMenuItem;
+    Sobre1: TMenuItem;
+    sobreoprograma1: TMenuItem;
+    SobreoProgramador1: TMenuItem;
+    FontDialog1: TFontDialog;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    ColorDialog1: TColorDialog;
+    PrintDialog1: TPrintDialog;
+    TTimer: TTimer;
+    ImageList: TImageList;
+    PopupMenu1: TPopupMenu;
+    Recortar2: TMenuItem;
+    Copiar2: TMenuItem;
+    Colar2: TMenuItem;
+    N3: TMenuItem;
+    Fonte2: TMenuItem;
+    Selecionartudo2: TMenuItem;
+    ActionList1: TActionList;
+    procedure btequipeClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmcompilador: Tfrmcompilador;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrmcompilador.btequipeClick(Sender: TObject);
+begin
+  synmensagem.Text := 'Joelvis Roman da Silva';
+end;
+
+end.
