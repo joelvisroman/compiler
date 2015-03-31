@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl;
+  AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl, SynEdit;
 
 type
   Tfrmcompilador = class(TForm)
@@ -19,10 +19,11 @@ type
     btcompilar: TSpeedButton;
     btgerarcodigo: TSpeedButton;
     btequipe: TSpeedButton;
-    AdvMemo1: TAdvMemo;
     Splitter1: TSplitter;
     StatusBar1: TStatusBar;
-    AdvMemo2: TAdvMemo;
+    syneditor: TSynEdit;
+    synmensagem: TSynEdit;
+    procedure btequipeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,5 +36,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tfrmcompilador.btequipeClick(Sender: TObject);
+begin
+  synmensagem.Text := 'Joelvis Roman da Silva';
+end;
 
 end.

@@ -13,10 +13,6 @@ Coordinates=272,78,64,36
 [btsalvar]
 Coordinates=202,78,60,36
 
-[AdvMemo1]
-Coordinates=113,78,79,36
-Visible=True
-
 [btgerarcodigo]
 Coordinates=10,78,93,36
 
@@ -33,5 +29,6 @@ Coordinates=178,10,70,36
 Coordinates=94,10,74,36
 
 []
-Coordinates=308,56,91,36
+Coordinates=113,78,79,36
+Visible=True
 
