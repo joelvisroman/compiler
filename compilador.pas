@@ -21,7 +21,7 @@ type
     btgerarcodigo: TSpeedButton;
     btequipe: TSpeedButton;
     Splitter1: TSplitter;
-    StatusBar1: TStatusBar;
+    stBarra: TStatusBar;
     synEditor: TSynEdit;
     synMensagens: TSynEdit;
     actAcoes: TActionList;
@@ -34,7 +34,8 @@ type
     compilar: TAction;
     gerar: TAction;
     equipe: TAction;
-    procedure actFileNewExecute(Sender: TObject);
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
     procedure novoExecute(Sender: TObject);
     procedure abrirExecute(Sender: TObject);
     procedure salvarExecute(Sender: TObject);
@@ -44,10 +45,15 @@ type
     procedure compilarExecute(Sender: TObject);
     procedure gerarExecute(Sender: TObject);
     procedure equipeExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure synEditorChange(Sender: TObject);
   private
     { Private declarations }
+    procedure plAdicionaLinhasIniciais;
   public
     { Public declarations }
+    vbArquivoModificado: Boolean;
+    gsCaminho : String;
   end;
 
 var
@@ -59,52 +65,100 @@ implementation
 
 procedure Tfrmcompilador.abrirExecute(Sender: TObject);
 begin
-  ShowMessage('abrir');
-end;
-
-procedure Tfrmcompilador.actFileNewExecute(Sender: TObject);
-begin
-  ShowMessage('teste');
+  if OpenDialog1.Execute then
+  begin
+    synEditor.Clear;
+    synMensagens.Clear;
+    synEditor.Lines.LoadFromFile(OpenDialog1.Filename);
+    plAdicionaLinhasIniciais;
+    stBarra.Panels[0].text := 'Não modificado';
+    stBarra.Panels[1].Text := OpenDialog1.FileName;
+    gsCaminho := OpenDialog1.FileName;
+  end;
 end;
 
 procedure Tfrmcompilador.colarExecute(Sender: TObject);
 begin
-  ShowMessage('colar');
+  synEditor.PasteFromClipboard;
 end;
 
 procedure Tfrmcompilador.compilarExecute(Sender: TObject);
 begin
-  ShowMessage('compilar');
+  synMensagens.Lines.Add('compilação de programas ainda não foi implementada');
 end;
 
 procedure Tfrmcompilador.copiarExecute(Sender: TObject);
 begin
-  ShowMessage('copiar');
+  synEditor.CopyToClipboard;
 end;
 
 procedure Tfrmcompilador.equipeExecute(Sender: TObject);
 begin
-  ShowMessage('equipe');
+  synMensagens.Lines.Add('Joelvis Roman da Silva')
+end;
+
+procedure Tfrmcompilador.FormCreate(Sender: TObject);
+begin
+ stBarra.Panels[0].text := 'Não modificado';
+ stBarra.Panels[1].Text := EmptyStr;
+ plAdicionaLinhasIniciais;
 end;
 
 procedure Tfrmcompilador.gerarExecute(Sender: TObject);
 begin
-  ShowMessage('gerar');
+  synMensagens.Lines.Add('geração de código ainda não foi implementada');
 end;
 
 procedure Tfrmcompilador.novoExecute(Sender: TObject);
 begin
-  ShowMessage('novo');
+  synEditor.Clear;
+  synMensagens.Clear;
+  plAdicionaLinhasIniciais;
+  stBarra.Panels[0].text := 'Não modificado';
+  stBarra.Panels[1].Text := EmptyStr;
+end;
+
+procedure Tfrmcompilador.plAdicionaLinhasIniciais;
+var
+ i : integer;
+begin
+  for i := 1 to 300 do
+  begin
+    synEditor.Lines.Add(EmptyStr);
+  end;
 end;
 
 procedure Tfrmcompilador.recortarExecute(Sender: TObject);
 begin
-  ShowMessage('recortar');
+  synEditor.CutToClipboard;
 end;
 
 procedure Tfrmcompilador.salvarExecute(Sender: TObject);
 begin
-  ShowMessage('salvar');
+ if gsCaminho = EmptyStr then
+ begin
+   if SaveDialog1.Execute then
+   begin
+     synEditor.Lines.SaveToFile(SaveDialog1.FileName);
+     stBarra.Panels[0].text := 'Não modificado';
+     stBarra.Panels[1].text := SaveDialog1.FileName;
+     gsCaminho := SaveDialog1.FileName;
+     synMensagens.Clear;
+   end;
+ end
+ else
+   begin
+     synEditor.Lines.SaveToFile(gsCaminho);
+     stBarra.Panels[0].text := 'Não modificado';
+     synMensagens.Clear;
+   end;
+end;
+
+procedure Tfrmcompilador.synEditorChange(Sender: TObject);
+begin
+  stBarra.Panels[0].text := 'Modificado';
+  if (synEditor.Lines.Count = 1) then
+    plAdicionaLinhasIniciais;
 end;
 
 end.

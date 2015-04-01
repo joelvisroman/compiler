@@ -12,7 +12,8 @@ object frmcompilador: Tfrmcompilador
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
@@ -734,12 +735,18 @@ object frmcompilador: Tfrmcompilador
       ExplicitHeight = 61
     end
   end
-  object StatusBar1: TStatusBar
+  object stBarra: TStatusBar
     Left = 0
     Top = 485
     Width = 903
     Height = 19
-    Panels = <>
+    Panels = <
+      item
+        Width = 400
+      end
+      item
+        Width = 1000
+      end>
   end
   object synEditor: TSynEdit
     Left = 0
@@ -760,7 +767,9 @@ object frmcompilador: Tfrmcompilador
     Gutter.Font.Name = 'Courier New'
     Gutter.Font.Style = []
     Gutter.ShowLineNumbers = True
+    OnChange = synEditorChange
     FontSmoothing = fsmNone
+    ExplicitLeft = 1
   end
   object synMensagens: TSynEdit
     Left = 0
@@ -785,8 +794,8 @@ object frmcompilador: Tfrmcompilador
     FontSmoothing = fsmNone
   end
   object actAcoes: TActionList
-    Left = 472
-    Top = 208
+    Left = 800
+    Top = 184
     object novo: TAction
       Caption = 'novo [ctrl+n]'
       ShortCut = 16462
@@ -832,5 +841,18 @@ object frmcompilador: Tfrmcompilador
       ShortCut = 112
       OnExecute = equipeExecute
     end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = 'txt'
+    Filter = 'Arquivo de texto|*.txt|Todos os arquivos|*.*'
+    Left = 736
+    Top = 184
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = 'txt'
+    Filter = 'Arquivo de texto|*.txt|Todos os arquivos|*.*'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 656
+    Top = 184
   end
 end
