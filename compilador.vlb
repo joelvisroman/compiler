@@ -32,3 +32,6 @@ Coordinates=94,10,74,36
 Coordinates=113,78,79,36
 Visible=True
 
+[Splitter1]
+Visible=False
+

@@ -18,11 +18,14 @@ object frmcompilador: Tfrmcompilador
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 373
+    Top = 376
     Width = 903
     Height = 6
-    Cursor = crVSplit
+    Cursor = crNo
     Align = alBottom
+    AutoSnap = False
+    ResizeStyle = rsUpdate
+    Visible = False
     ExplicitTop = 346
   end
   object W7Panel1: TPanel
@@ -752,7 +755,7 @@ object frmcompilador: Tfrmcompilador
     Left = 0
     Top = 82
     Width = 903
-    Height = 291
+    Height = 294
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -769,13 +772,13 @@ object frmcompilador: Tfrmcompilador
     Gutter.ShowLineNumbers = True
     OnChange = synEditorChange
     FontSmoothing = fsmNone
-    ExplicitLeft = 1
+    ExplicitHeight = 291
   end
   object synMensagens: TSynEdit
     Left = 0
-    Top = 379
+    Top = 382
     Width = 903
-    Height = 106
+    Height = 103
     Align = alBottom
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -792,6 +795,7 @@ object frmcompilador: Tfrmcompilador
     Gutter.Width = 0
     ReadOnly = True
     FontSmoothing = fsmNone
+    ExplicitTop = 381
   end
   object actAcoes: TActionList
     Left = 800
@@ -845,13 +849,14 @@ object frmcompilador: Tfrmcompilador
   object OpenDialog1: TOpenDialog
     DefaultExt = 'txt'
     Filter = 'Arquivo de texto|*.txt|Todos os arquivos|*.*'
+    FilterIndex = 2
     Left = 736
     Top = 184
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = 'txt'
     Filter = 'Arquivo de texto|*.txt|Todos os arquivos|*.*'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    FilterIndex = 2
     Left = 656
     Top = 184
   end

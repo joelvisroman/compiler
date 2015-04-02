@@ -102,6 +102,7 @@ begin
  stBarra.Panels[0].text := 'Não modificado';
  stBarra.Panels[1].Text := EmptyStr;
  plAdicionaLinhasIniciais;
+ gsCaminho := EmptyStr;
 end;
 
 procedure Tfrmcompilador.gerarExecute(Sender: TObject);
@@ -113,6 +114,7 @@ procedure Tfrmcompilador.novoExecute(Sender: TObject);
 begin
   synEditor.Clear;
   synMensagens.Clear;
+  gsCaminho := EmptyStr;
   plAdicionaLinhasIniciais;
   stBarra.Panels[0].text := 'Não modificado';
   stBarra.Panels[1].Text := EmptyStr;
