@@ -772,7 +772,6 @@ object frmcompilador: Tfrmcompilador
     Gutter.ShowLineNumbers = True
     OnChange = synEditorChange
     FontSmoothing = fsmNone
-    ExplicitHeight = 291
   end
   object synMensagens: TSynEdit
     Left = 0
@@ -795,7 +794,6 @@ object frmcompilador: Tfrmcompilador
     Gutter.Width = 0
     ReadOnly = True
     FontSmoothing = fsmNone
-    ExplicitTop = 381
   end
   object actAcoes: TActionList
     Left = 800

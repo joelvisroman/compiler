@@ -115,7 +115,7 @@ end;
 
 function TLexico.nextState(c : char; state : integer) : integer;
 begin
-    result := SCANNER_TABLE[state][c];
+    result := SCANNER_TABLE[state][Ord(c)];
 end;
 
 function TLexico.tokenForState(state : integer) : integer;

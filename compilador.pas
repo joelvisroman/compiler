@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
   AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl, SynEdit, Vcl.ImgList,
-  System.Actions, Vcl.ActnList;
+  System.Actions, Vcl.ActnList, ULexico, UToken, ULexicalError;
 
 type
   Tfrmcompilador = class(TForm)
@@ -50,6 +50,7 @@ type
   private
     { Private declarations }
     procedure plAdicionaLinhasIniciais;
+    procedure plCompilarPrograma;
   public
     { Public declarations }
     vbArquivoModificado: Boolean;
@@ -127,6 +128,31 @@ begin
   for i := 1 to 300 do
   begin
     synEditor.Lines.Add(EmptyStr);
+  end;
+end;
+
+procedure Tfrmcompilador.plCompilarPrograma;
+var
+ lexico : TLexico;
+ t : TToken;
+begin
+  lexico := TLexico.create;
+  lexico.setInput( (* entrada *) );
+  try
+   try
+     t := lexico.nextToken;
+     while (t <> nil) do
+     begin
+       writeln(t.getLexeme);
+       t.Destroy;
+       t := lexico.nextToken;
+     end;
+   except
+    on e : ELexicalError do
+      writeln(e.getMessage, ', em ', e.getPosition);
+  end;
+  finally
+    lexico.destroy;
   end;
 end;
 
