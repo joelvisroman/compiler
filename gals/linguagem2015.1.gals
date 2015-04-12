@@ -1,0 +1,69 @@
+#Options
+GenerateScanner = true
+GenerateParser = false
+Language = Delphi
+ScannerName = Lexico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = Stream
+#RegularDefinitions
+lmai: [A-Z]
+lmin: [a-z]
+digitos: [0-9]
+binario: [0-1]
+hexmin: [a-f]
+hexmai: [A-F]
+comentario_linha: ;([^\n])*
+comentario_bloco: "#|" ([^"#""|"]|[\r\n])+([^"|""#"]|(("#")+|("|")+)[^"#""|"])*"|#"
+
+
+#Tokens
+//Ignorados
+:[\s\t\n\r]
+:!{comentario_linha}
+:!{comentario_bloco}
+
+//Id
+identificador: ({lmin}|{lmai})+(({lmin}|{lmai})*|{digitos}*|_ ({lmin}|{lmai}|{digitos})+)*_?
+
+//Palavras reservadas
+and      = identificador : "and"
+or       = identificador : "or"
+not      = identificador : "not"
+define   = identificador : "define"
+describe = identificador : "describe"
+false    = identificador : "false"
+true     = identificador : "true"
+let      = identificador : "let"
+display  = identificador : "display"
+do       = identificador : "do"
+if       = identificador : "if"
+read     = identificador : "read"
+set      = identificador : "set"
+until    = identificador : "until"
+
+//Símbolos especiais
+"("
+")"
+"["
+"]"
+"^"
+"=="
+"<>"
+"<"
+"<="
+">"
+">="
+"+"
+"-"
+"*"
+"/"
+","
+
+//Constantes
+constante_inteira: ((#d)|(#D))?{digitos}+
+constante_binaria: (#b|#B){binario}+
+constante_hexadec: (#x|#X)({digitos}|{hexmin}|{hexmai})+
+constante_real: {digitos}+.{digitos}+
+constante_string: \"[^\n\"]*\"
+constante_caracter: (("#\") (space|newline|tab))
