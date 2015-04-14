@@ -85,7 +85,7 @@ end;
 
 procedure Tfrmcompilador.compilarExecute(Sender: TObject);
 begin
-  synMensagens.Lines.Add('compilação de programas ainda não foi implementada');
+  plCompilarPrograma;
 end;
 
 procedure Tfrmcompilador.copiarExecute(Sender: TObject);
@@ -135,24 +135,28 @@ procedure Tfrmcompilador.plCompilarPrograma;
 var
  lexico : TLexico;
  t : TToken;
+ i : Integer;
 begin
   lexico := TLexico.create;
-  lexico.setInput( (* entrada *) );
   try
-   try
-     t := lexico.nextToken;
-     while (t <> nil) do
-     begin
-       writeln(t.getLexeme);
-       t.Destroy;
-       t := lexico.nextToken;
-     end;
-   except
-    on e : ELexicalError do
-      writeln(e.getMessage, ', em ', e.getPosition);
-  end;
+    for i := 0 to synEditor.Lines.Count -1 do
+    begin
+      lexico.setInput(synEditor.Lines.Strings[i]);
+       try
+         t := lexico.nextToken;
+         while (t <> nil) do
+         begin
+           synMensagens.Lines.Add(t.getLexeme);
+           t.Destroy;
+           t := lexico.nextToken;
+         end;
+       except
+        on e : ELexicalError do
+          synMensagens.Lines.Add(e.getMessage + ' em ' + IntToStr((i + 1)));
+      end;
+    end;
   finally
-    lexico.destroy;
+    lexico.Destroy;
   end;
 end;
 

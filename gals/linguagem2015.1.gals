@@ -5,7 +5,7 @@ Language = Delphi
 ScannerName = Lexico
 ScannerCaseSensitive = true
 ScannerTable = Full
-Input = Stream
+Input = String
 #RegularDefinitions
 lmai: [A-Z]
 lmin: [a-z]
