@@ -102,8 +102,24 @@ begin
 end;
 
 function Tfrmcompilador.flRetornaClasseToken(idToken: Integer): string;
+var
+ lsClasse: string;
 begin
-
+  lsClasse := EmptyStr;
+  case idToken of
+    2: lsClasse := 'identificador';
+    3,4,5,6,7,8,9,10,11,12,13,14,
+    15,16: lsClasse := 'palavra reservada';
+    17,18,19,20,21,22,23,
+    24,25,26,27,28,29,30,31,32: lsClasse := 'símbolo especial';
+    33: lsClasse := 'constante inteira';
+    34: lsClasse := 'constante binária';
+    35: lsClasse := 'constante hexadecimal';
+    36: lsClasse := 'constante real';
+    37: lsClasse := 'constante string';
+    38: lsClasse := 'constante caracter';
+  end;
+  Result := lsClasse;
 end;
 
 procedure Tfrmcompilador.FormCreate(Sender: TObject);
@@ -158,7 +174,7 @@ begin
          t := lexico.nextToken;
          while (t <> nil) do
          begin
-           conteudoMensagem := t.getLexeme().trim() + '          ' + flRetornaClasseToken(t.getId()) + '          ' + IntToStr(numeroLinha + 1);
+           conteudoMensagem := IntToStr(numeroLinha + 1) + '  ' + flRetornaClasseToken(t.getId()) + '  ' + t.getLexeme().trim();
            synMensagens.Lines.Add(conteudoMensagem);
            t.Destroy;
            t := lexico.nextToken;
@@ -166,8 +182,10 @@ begin
        except
         on ex : ELexicalError do
         begin
-          mensagemErro:= 'Erro na linha ' + Integer.toString(numeroLinha + 1) + ' - ' + synEditor.Lines.Strings[i] + ' ' + ex.getMessage();
+          synMensagens.Lines.Clear;
+          mensagemErro:= 'Erro na linha ' + Integer.toString(numeroLinha + 1) + ' - ' + Trim(synEditor.Lines.Strings[i]) + ' ' + ex.getMessage();
           synMensagens.Lines.Add(mensagemErro);
+          break;
         end;
       end;
     end;
