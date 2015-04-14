@@ -49,8 +49,11 @@ type
     procedure synEditorChange(Sender: TObject);
   private
     { Private declarations }
+    {procedures}
     procedure plAdicionaLinhasIniciais;
     procedure plCompilarPrograma;
+    {functions}
+    function flRetornaClasseToken(idToken: Integer) :string;
   public
     { Public declarations }
     vbArquivoModificado: Boolean;
@@ -98,6 +101,11 @@ begin
   synMensagens.Lines.Add('Joelvis Roman da Silva')
 end;
 
+function Tfrmcompilador.flRetornaClasseToken(idToken: Integer): string;
+begin
+
+end;
+
 procedure Tfrmcompilador.FormCreate(Sender: TObject);
 begin
  stBarra.Panels[0].text := 'Não modificado';
@@ -135,24 +143,32 @@ procedure Tfrmcompilador.plCompilarPrograma;
 var
  lexico : TLexico;
  t : TToken;
- i : Integer;
+ i,
+ numerolinha : Integer;
+ conteudoMensagem,
+ mensagemErro : string;
 begin
   lexico := TLexico.create;
   try
     for i := 0 to synEditor.Lines.Count -1 do
     begin
+      numerolinha := i;
       lexico.setInput(synEditor.Lines.Strings[i]);
        try
          t := lexico.nextToken;
          while (t <> nil) do
          begin
-           synMensagens.Lines.Add(t.getLexeme);
+           conteudoMensagem := t.getLexeme().trim() + '          ' + flRetornaClasseToken(t.getId()) + '          ' + IntToStr(numeroLinha + 1);
+           synMensagens.Lines.Add(conteudoMensagem);
            t.Destroy;
            t := lexico.nextToken;
          end;
        except
-        on e : ELexicalError do
-          synMensagens.Lines.Add(e.getMessage + ' em ' + IntToStr((i + 1)));
+        on ex : ELexicalError do
+        begin
+          mensagemErro:= 'Erro na linha ' + Integer.toString(numeroLinha + 1) + ' - ' + synEditor.Lines.Strings[i] + ' ' + ex.getMessage();
+          synMensagens.Lines.Add(mensagemErro);
+        end;
       end;
     end;
   finally
