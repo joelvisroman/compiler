@@ -53,7 +53,10 @@ type
     procedure plAdicionaLinhasIniciais;
     procedure plCompilarPrograma;
     {functions}
+    {Realiza analise lexica}
     function flRetornaClasseToken(idToken: Integer) :string;
+    {Auxiliar para formatar as mensagens apresentadas}
+    function StrFormat(AText, Caracter: String; Size: Word): String;
   public
     { Public declarations }
     vbArquivoModificado: Boolean;
@@ -163,32 +166,43 @@ var
  numerolinha : Integer;
  conteudoMensagem,
  mensagemErro : string;
+ erro : boolean;
 begin
+  erro := false;
   lexico := TLexico.create;
   try
-    for i := 0 to synEditor.Lines.Count -1 do
-    begin
-      numerolinha := i;
-      lexico.setInput(synEditor.Lines.Strings[i]);
-       try
+   for i := 0 to synEditor.Lines.Count -1 do
+   begin
+     numerolinha := i;
+     lexico.setInput(synEditor.Lines.Strings[i]);
+      try
+       t := lexico.nextToken;
+       while (t <> nil) do
+       begin
+         conteudoMensagem := StrFormat(IntToStr(numeroLinha + 1),' ',12) +  StrFormat(flRetornaClasseToken(t.getId()),' ',25) +  t.getLexeme().trim();
+         synMensagens.Lines.Add(conteudoMensagem);
+         t.Destroy;
          t := lexico.nextToken;
-         while (t <> nil) do
-         begin
-           conteudoMensagem := IntToStr(numeroLinha + 1) + '  ' + flRetornaClasseToken(t.getId()) + '  ' + t.getLexeme().trim();
-           synMensagens.Lines.Add(conteudoMensagem);
-           t.Destroy;
-           t := lexico.nextToken;
-         end;
-       except
-        on ex : ELexicalError do
-        begin
-          synMensagens.Lines.Clear;
-          mensagemErro:= 'Erro na linha ' + Integer.toString(numeroLinha + 1) + ' - ' + Trim(synEditor.Lines.Strings[i]) + ' ' + ex.getMessage();
-          synMensagens.Lines.Add(mensagemErro);
-          break;
-        end;
-      end;
-    end;
+       end;
+      except
+       on ex : ELexicalError do
+       begin
+         erro := true;
+         synMensagens.Lines.Clear;
+         mensagemErro:= 'Erro na linha ' + Integer.toString(numeroLinha + 1) + ' - ' + Trim(synEditor.Lines.Strings[i]) + ' ' + ex.getMessage();
+         synMensagens.Lines.Add(mensagemErro);
+         break;
+       end;
+     end;
+   end;
+   if not(erro) then
+   begin
+     if not(synMensagens.Lines.Text.IsEmpty) then
+     begin
+       synMensagens.Lines.Insert(0,StrFormat('linha', ' ', 12) + StrFormat('classe', ' ', 25) + StrFormat('lexema', ' ', 6));
+       synMensagens.Lines.Add('programa compilado com sucesso');
+     end;
+   end;
   finally
     lexico.Destroy;
   end;
@@ -218,6 +232,15 @@ begin
      stBarra.Panels[0].text := 'Não modificado';
      synMensagens.Clear;
    end;
+end;
+
+function Tfrmcompilador.StrFormat(AText, Caracter: String; Size: Word): String;
+var
+  i: Integer;
+begin
+  Result := Copy(AText, 1, Size);
+  for i := Length(AText) to Size - 1 do
+    Result := Result + Caracter;
 end;
 
 procedure Tfrmcompilador.synEditorChange(Sender: TObject);
