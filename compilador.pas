@@ -57,6 +57,9 @@ type
     function flRetornaClasseToken(idToken: Integer) :string;
     {Auxiliar para formatar as mensagens apresentadas}
     function StrFormat(AText, Caracter: String; Size: Word): String;
+    {Encontra linha}
+    function econtralinha(posicao: integer): integer;
+    function RemoveQuebraLinha(sString: string): string;
   public
     { Public declarations }
     vbArquivoModificado: Boolean;
@@ -91,12 +94,36 @@ end;
 
 procedure Tfrmcompilador.compilarExecute(Sender: TObject);
 begin
-  plCompilarPrograma;
+  if synEditor.Text.Trim.IsEmpty then
+    synMensagens.Lines.Add('nenhum programa para compilar')
+  else
+  begin
+    synMensagens.Clear;
+    plCompilarPrograma;
+  end;
 end;
 
 procedure Tfrmcompilador.copiarExecute(Sender: TObject);
 begin
   synEditor.CopyToClipboard;
+end;
+
+function Tfrmcompilador.econtralinha(posicao :integer): integer;
+var
+  somatorio : Integer;
+  i  : Integer;
+begin
+  somatorio := 0;
+  for i := 0 to synEditor.Lines.Count - 1 do
+  begin
+    somatorio := somatorio + 1 + length(Trim(synEditor.Lines[i]));
+    if somatorio >= posicao then
+    begin
+      Result := i + 1;
+      exit;
+    end;
+  end;
+  Result := synEditor.Lines.Count + 1
 end;
 
 procedure Tfrmcompilador.equipeExecute(Sender: TObject);
@@ -163,38 +190,35 @@ var
  lexico : TLexico;
  t : TToken;
  i,
- numerolinha : Integer;
+ numerolinha, position : Integer;
  conteudoMensagem,
- mensagemErro : string;
+ mensagemErro, linha, lexema, entrada : string;
  erro : boolean;
 begin
   erro := false;
+  lexema := EmptyStr;
   lexico := TLexico.create;
   try
-   for i := 0 to synEditor.Lines.Count -1 do
-   begin
-     numerolinha := i;
-     lexico.setInput(synEditor.Lines.Strings[i]);
-      try
+    lexico.setInput(synEditor.Lines.Text);
+    try
+     t := lexico.nextToken;
+     while (t <> nil) do
+     begin
+       conteudoMensagem := StrFormat(IntToStr(econtralinha(t.getPosition)),' ', 12) +  StrFormat(flRetornaClasseToken(t.getId()),' ',25) +  t.getLexeme;
+       synMensagens.Lines.Add(conteudoMensagem);
+       t.Destroy;
        t := lexico.nextToken;
-       while (t <> nil) do
-       begin
-         conteudoMensagem := StrFormat(IntToStr(numeroLinha + 1),' ',12) +  StrFormat(flRetornaClasseToken(t.getId()),' ',25) +  t.getLexeme().trim();
-         synMensagens.Lines.Add(conteudoMensagem);
-         t.Destroy;
-         t := lexico.nextToken;
-       end;
-      except
-       on ex : ELexicalError do
-       begin
-         erro := true;
-         synMensagens.Lines.Clear;
-         mensagemErro:= 'Erro na linha ' + Integer.toString(numeroLinha + 1) + ' - ' + Trim(synEditor.Lines.Strings[i]) + ' ' + ex.getMessage();
-         synMensagens.Lines.Add(mensagemErro);
-         break;
-       end;
      end;
-   end;
+    except
+     on ex : ELexicalError do
+     begin
+       erro := true;
+       position := ex.getPosition;
+       synMensagens.Lines.Clear;
+       mensagemErro:= 'Erro na linha ' + IntToStr(econtralinha(position)-1) + ' - ' + Copy(synEditor.Lines.Text,(position-1), position) + '  ' + ex.getMessage();
+       synMensagens.Lines.Add(mensagemErro);
+     end;
+    end;
    if not(erro) then
    begin
      if not(synMensagens.Lines.Text.IsEmpty) then
@@ -211,6 +235,21 @@ end;
 procedure Tfrmcompilador.recortarExecute(Sender: TObject);
 begin
   synEditor.CutToClipboard;
+end;
+
+function Tfrmcompilador.RemoveQuebraLinha(sString: string): string;
+var i: Integer;
+    s: String;
+begin
+//  #13#10
+for i:=1 to Length(sString) do
+  begin
+  if (Copy(sString, i, 1) = chr(13)) or (Copy(sString, i, 1) = chr(10)) then
+    s:=s + ' '
+  else
+    s:=s + Copy(sString, i, 1);
+  end;
+Result:=s;
 end;
 
 procedure Tfrmcompilador.salvarExecute(Sender: TObject);

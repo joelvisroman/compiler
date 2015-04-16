@@ -19,7 +19,7 @@ comentario_bloco: "#|" ([^"#""|"]|[\r\n])+([^"|""#"]|(("#")+|("|")+)[^"#""|"])*"
 
 #Tokens
 //Ignorados
-:[\s\t\n\r]
+:[\ \s\t\n\r]
 :!{comentario_linha}
 :!{comentario_bloco}
 
