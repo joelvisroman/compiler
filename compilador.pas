@@ -111,20 +111,28 @@ end;
 
 function Tfrmcompilador.econtralinha(posicao :integer): integer;
 var
-  somatorio : Integer;
-  i  : Integer;
+ i,
+ linha,
+ soma  : Integer;
 begin
-  somatorio := 0;
+  soma := 0;
+  linha := 0;
   for i := 0 to synEditor.Lines.Count - 1 do
   begin
-    somatorio := somatorio + 1 + length(Trim(synEditor.Lines[i]));
-    if somatorio >= posicao then
+    //caso linha seja incrementada garantir que o valor fique correto
+    linha := linha + i;
+    //caso seja linha em branco contar também
+    if Trim(synEditor.Lines[i]) = EmptyStr then
+      linha := linha + 1
+    else
+     soma := soma + Length(Trim(synEditor.Lines[i]));
+
+    if (posicao <= soma) then
     begin
-      Result := i + 1;
-      exit;
+     Result := linha;
+     exit;
     end;
   end;
-  Result := synEditor.Lines.Count + 1
 end;
 
 procedure Tfrmcompilador.equipeExecute(Sender: TObject);
@@ -197,21 +205,21 @@ begin
   semantico := TSemantico.create;
   try
     lexico.setInput(Trim(synEditor.Lines.Text));
-    synMensagens.Lines.Add('Programa compilado com sucesso.');
     try
       sintatico.parse(lexico, semantico);
+      synMensagens.Lines.Add('Programa compilado com sucesso.');
     except
     on e : ELexicalError do
      begin
-       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(e.getPosition));
+       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(econtralinha(e.getPosition)));
      end;
     on e : ESyntaticError do
      begin
-       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(e.getPosition));
+       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(econtralinha(e.getPosition)));
      end;
     on e : ESemanticError do
      begin
-       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(e.getPosition));
+       //em breve
      end;
     end;
   finally
