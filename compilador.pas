@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
   AdvMemo, AdvSplitter, Vcl.Menus, Vcl.ComCtrls, propscrl, SynEdit, Vcl.ImgList,
-  System.Actions, Vcl.ActnList, ULexico, UToken, ULexicalError;
+  System.Actions, Vcl.ActnList, ULexico, UToken, ULexicalError, USyntaticError, USintatico,
+  USemantico, USemanticError;
 
 type
   Tfrmcompilador = class(TForm)
@@ -138,8 +139,8 @@ begin
   lsClasse := EmptyStr;
   case idToken of
     2: lsClasse := 'identificador';
-    3,4,5,6,7,8,9,10,11,12,13,14,
-    15,16: lsClasse := 'palavra reservada';
+    3,4,5,6,7,8,9,
+    10,11,12,13,14,15,16: lsClasse := 'palavra reservada';
     17,18,19,20,21,22,23,
     24,25,26,27,28,29,30,31,32: lsClasse := 'símbolo especial';
     33: lsClasse := 'constante inteira';
@@ -187,46 +188,32 @@ end;
 
 procedure Tfrmcompilador.plCompilarPrograma;
 var
- lexico : TLexico;
- t : TToken;
- i,
- numerolinha, position : Integer;
- conteudoMensagem,
- mensagemErro, linha, lexema, entrada : string;
- erro : boolean;
+  lexico : TLexico;
+  sintatico : TSintatico;
+  semantico : TSemantico;
 begin
-  erro := false;
-  lexema := EmptyStr;
   lexico := TLexico.create;
+  sintatico := TSintatico.create;
+  semantico := TSemantico.create;
   try
-    lexico.setInput(synEditor.Lines.Text);
+    lexico.setInput(Trim(synEditor.Lines.Text));
+    synMensagens.Lines.Add('Programa compilado com sucesso.');
     try
-     t := lexico.nextToken;
-     while (t <> nil) do
-     begin
-       conteudoMensagem := StrFormat(IntToStr(econtralinha(t.getPosition)),' ', 12) +  StrFormat(flRetornaClasseToken(t.getId()),' ',25) +  t.getLexeme;
-       synMensagens.Lines.Add(conteudoMensagem);
-       t.Destroy;
-       t := lexico.nextToken;
-     end;
+      sintatico.parse(lexico, semantico);
     except
-     on ex : ELexicalError do
+    on e : ELexicalError do
      begin
-       erro := true;
-       position := ex.getPosition;
-       synMensagens.Lines.Clear;
-       mensagemErro:= 'Erro na linha ' + IntToStr(econtralinha(position)-1) + ' - ' + Copy(synEditor.Lines.Text,(position-1), position) + '  ' + ex.getMessage();
-       synMensagens.Lines.Add(mensagemErro);
+       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(e.getPosition));
+     end;
+    on e : ESyntaticError do
+     begin
+       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(e.getPosition));
+     end;
+    on e : ESemanticError do
+     begin
+       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(e.getPosition));
      end;
     end;
-   if not(erro) then
-   begin
-     if not(synMensagens.Lines.Text.IsEmpty) then
-     begin
-       synMensagens.Lines.Insert(0,StrFormat('linha', ' ', 12) + StrFormat('classe', ' ', 25) + StrFormat('lexema', ' ', 6));
-       synMensagens.Lines.Add('programa compilado com sucesso');
-     end;
-   end;
   finally
     lexico.Destroy;
   end;

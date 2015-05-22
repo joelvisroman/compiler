@@ -1,11 +1,14 @@
 #Options
 GenerateScanner = true
-GenerateParser = false
+GenerateParser = true
 Language = Delphi
 ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
 ScannerCaseSensitive = true
 ScannerTable = Full
 Input = String
+Parser = LL
 #RegularDefinitions
 lmai: [A-Z]
 lmin: [a-z]
@@ -19,7 +22,7 @@ comentario_bloco: "#|" ([^"#""|"]|[\r\n])+([^"|""#"]|(("#")+|("|")+)[^"#""|"])*"
 
 #Tokens
 //Ignorados
-:[\ \s\t\n\r]
+:[\ \t\n\r]
 :!{comentario_linha}
 :!{comentario_bloco}
 
@@ -64,6 +67,81 @@ until    = identificador : "until"
 constante_inteira: ((#d)|(#D))?{digitos}+
 constante_binaria: (#b|#B){binario}+
 constante_hexadec: (#x|#X)({digitos}|{hexmin}|{hexmai})+
-constante_real: {digitos}+.{digitos}+
+constante_real: {digitos}+\.{digitos}+
 constante_string: \"[^\n\"]*\"
 constante_caracter: (("#\") (space|newline|tab))
+#NonTerminals
+<programa>
+<declaracao>
+<parametros>
+<valor>
+<constante_logica>
+<funcao>
+<relacao_parametros>
+<lista_identificadores>
+<corpo>
+<saida>
+<lista_variaveis>
+<variavel>
+<lista_comandos>
+<comando>
+<atribuicao>
+<selecao>
+<alternativa>
+<comando1>
+<repeticao>
+<retorno>
+<expressao>
+<expressao1>
+<elemento>
+<relacional>
+<relacional1>
+<operador_relacional>
+<aritmetica>
+<aritmetica1>
+<termo>
+<termo1>
+<fator>
+<fator1>
+<argumentos>
+<lista_expressoes>
+<lista_expressoes1>
+<lista_identificadores1>
+<lista_comandos1>
+#Grammar
+<programa> ::= <declaracao> <funcao> "(" <corpo> ")";
+<declaracao> ::= define identificador "(" <parametros> ")" <declaracao> | î;
+<parametros> ::= "[" identificador <valor> "]" <parametros> | î;
+<constante_logica> ::= true | false;
+<valor> ::= <constante_logica> | constante_inteira | constante_binaria | constante_hexadec | constante_real | constante_string | constante_caracter;
+<funcao> ::= describe identificador "(" <relacao_parametros> ")" "(" <corpo> ")" <funcao> | î;
+<relacao_parametros> ::= <lista_identificadores> | î;
+<lista_identificadores> ::= identificador <lista_identificadores1>;
+<corpo> ::= <lista_variaveis> <lista_comandos>;
+<lista_variaveis> ::= î | <variavel> <lista_variaveis>;
+<variavel> ::= let "[" <lista_identificadores> <valor> "]";
+<lista_comandos> ::= <comando> <lista_comandos1>;
+<comando> ::= set "[" identificador <comando1> | <saida> | <selecao> | <repeticao> | <retorno>;
+<saida> ::= display "(" <expressao> ")";
+<selecao> ::= if "(" <expressao> ")" "(" <lista_comandos> ")" <alternativa> ;
+<alternativa> ::= î | "(" <lista_comandos> ")";
+<repeticao> ::= do "(" <lista_comandos> ")" "(" until <expressao> ")";
+<retorno> ::= "^" <expressao>;
+<expressao> ::= <elemento> <expressao1>;
+<expressao1> ::= and <elemento> <expressao1> | or <elemento> <expressao1> | î;
+<elemento> ::= <relacional> | true | false | not <elemento>;
+<relacional> ::= <aritmetica> <relacional1>;
+<relacional1> ::= <operador_relacional> <aritmetica> |  î;
+<operador_relacional> ::= "==" | "<>" | "<" | "<=" | ">" | ">="; 
+<aritmetica> ::=  <termo> <aritmetica1>;
+<aritmetica1> ::= "+" <termo> <aritmetica1>| "-" <termo> <aritmetica1>| î;
+<termo> ::= <fator> <termo1>;
+<termo1> ::= "*" <fator> <termo1> | "/" <fator> <termo1> | î;
+<fator> ::= identificador <fator1>  | constante_inteira | constante_binaria | constante_hexadec |constante_real | constante_string | constante_caracter | "(" <expressao> ")" | "+" <fator> | "-" <fator>;
+<fator1> ::= "(" <argumentos> ")" | î;
+<argumentos> ::= <lista_expressoes>| î;
+<lista_expressoes> ::= <expressao> <lista_expressoes1>;
+<lista_expressoes1> ::= "," <lista_expressoes> |  î;
+<lista_identificadores1> ::= î | "," <lista_identificadores>;
+<lista_comandos1> ::= î | <lista_comandos>;
+<comando1> ::= <expressao> "]" | read "]";

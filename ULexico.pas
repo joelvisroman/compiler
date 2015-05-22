@@ -20,12 +20,12 @@ type
         position : integer;
         endPos : integer;
 
-        function nextState(c : char; state : integer) : integer;
+        function nextState(c : AnsiChar; state : integer) : integer;
         function tokenForState(state : integer) : integer;
         function lookupToken(base : integer; key : string) : integer;
 
         function hasInput : boolean;
-        function nextChar : char;
+        function nextChar : AnsiChar;
     end;
 
 implementation
@@ -113,9 +113,9 @@ begin
     self.endPos := endPos;
 end;
 
-function TLexico.nextState(c : char; state : integer) : integer;
+function TLexico.nextState(c : AnsiChar; state : integer) : integer;
 begin
-    result := SCANNER_TABLE[state][Ord(c)];
+    result := SCANNER_TABLE[state][c];
 end;
 
 function TLexico.tokenForState(state : integer) : integer;
@@ -158,15 +158,15 @@ begin
     result := position <= endPos;
 end;
 
-function TLexico.nextChar : char;
+function TLexico.nextChar : AnsiChar;
 begin
     if hasInput then
     begin
-        result := input[position];
+        result := AnsiChar(input[position]);
         position := position + 1;
     end
     else
-        result := char(0);
+        result := AnsiChar(0);
 end;
 
 end.

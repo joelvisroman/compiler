@@ -15,8 +15,8 @@ File_12=TSourceModule,'C:\Desenvolvimento\Projetos\vestispcp\Fontes\Core\Forms\P
 
 [Modules]
 Module0=C:\Users\user\Documents\GitHub\compiler\compilador.pas
-Module1=C:\Users\user\Documents\GitHub\compiler\ULexico.pas
-Module2=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
+Module1=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
+Module2=C:\Users\user\Documents\GitHub\compiler\ULexico.pas
 Module3=default.htm
 Count=4
 EditWindowCount=1
@@ -26,12 +26,12 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\user\Documents\GitHub\compiler\ULexico.pas]
+[C:\Users\user\Documents\GitHub\compiler\UConstants.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Users\user\Documents\GitHub\compiler\UConstants.pas]
+[C:\Users\user\Documents\GitHub\compiler\ULexico.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -82,9 +82,9 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=C:\Users\user\Documents\GitHub\compiler\compilador.pas
-CursorX=26
-CursorY=122
-TopLine=105
+CursorX=127
+CursorY=218
+TopLine=191
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -93,9 +93,9 @@ EditViewName=C:\Users\user\Documents\GitHub\compiler\compilador.pas
 [View2]
 CustomEditViewType=TEditView
 Module=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
-CursorX=49
+CursorX=52
 CursorY=50
-TopLine=15
+TopLine=233
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -141,9 +141,9 @@ StayOnTop=0
 Count=5
 Breakpoint0='C:\Users\user\Documents\GitHub\compiler\compilador.pas',215,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint1='C:\Users\user\Documents\GitHub\compiler\compilador.pas',207,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint2='C:\Users\user\Documents\GitHub\compiler\compilador.pas',193,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint3='C:\Users\user\Documents\GitHub\compiler\compilador.pas',97,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint4='C:\Users\user\Documents\GitHub\compiler\compilador.pas',251,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint2='C:\Users\user\Documents\GitHub\compiler\compilador.pas',97,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint3='C:\Users\user\Documents\GitHub\compiler\compilador.pas',116,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint4='C:\Users\user\Documents\GitHub\compiler\compilador.pas',202,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
@@ -166,14 +166,14 @@ Create=1
 Visible=1
 Docked=0
 State=2
-Left=19
-Top=12
-Width=6388
-Height=8442
+Left=144
+Top=279
+Width=8931
+Height=8523
 MaxLeft=-6
 MaxTop=-12
-MaxWidth=6388
-MaxHeight=8442
+MaxWidth=8931
+MaxHeight=8523
 ClientWidth=10000
 ClientHeight=9744
 BottomPanelSize=8711
@@ -260,7 +260,7 @@ SplitPos=111
 [PropInspDesignerSelection]
 ArrangeBy=Name
 SelectedItem=Caption,
-ExpandedItems=Action=0,Anchors=0,Constraints=0
+ExpandedItems=Anchors=0
 
 [ModelViewTool]
 PercentageSizes=1
