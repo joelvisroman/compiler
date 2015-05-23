@@ -103,14 +103,14 @@ begin
             end;
         end
         else
-            raise ESyntaticError.create(PARSER_ERROR[x], currentToken.getPosition);
+            raise ESyntaticError.create('encontrado ' + currentToken.getLexeme + ' ' + PARSER_ERROR[x], currentToken.getPosition);
     end
     else if isNonTerminal(x) then
     begin
         if pushProduction(x, a) then
             result := false
         else
-            raise ESyntaticError.create(PARSER_ERROR[x], currentToken.getPosition);
+            raise ESyntaticError.create('encontrado ' + currentToken.getLexeme + ' ' + PARSER_ERROR[x], currentToken.getPosition);
     end
     else // isSemanticAction(x)
     begin

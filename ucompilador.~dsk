@@ -1,37 +1,67 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.pas',0,1,1,12,11,0,0,,
-File_1=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas',0,1,1,5,8,0,0,,
+File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,21586,1,21611,0,0,,
+File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.pas',0,1,24846,1,24867,0,0,,
 File_2=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\USemanticError.pas',0,1,1,20,1,0,0,,
-File_3=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UToken.pas',0,1,20,5,38,0,0,,
-File_4=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',0,1,23,4,41,0,0,,
-File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,352,1,370,0,0,,
-File_6=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynEditTextBuffer.pas',0,1,511,1,532,0,0,,
-File_7=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas',0,1,1,1,1,0,0,,
-File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.Classes.pas',0,1,5988,1,6004,0,0,,
-File_9=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynEdit.pas',0,1,6156,37,6176,0,0,,
-File_10=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynTextDrawer.pas',0,1,457,33,476,0,0,,
-File_11=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\win\Winapi.Windows.pas',0,1,21574,7,21597,0,0,,
-File_12=TSourceModule,'C:\Desenvolvimento\Projetos\vestispcp\Fontes\Core\Forms\Principal\FPrincipal.pas',0,1,1225,27,1231,0,0,,
+File_3=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynEditTextBuffer.pas',0,1,511,1,532,0,0,,
+File_4=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.Classes.pas',0,1,5988,1,6004,0,0,,
+File_5=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynEdit.pas',0,1,6156,37,6176,0,0,,
+File_6=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynTextDrawer.pas',0,1,457,33,476,0,0,,
+File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\win\Winapi.Windows.pas',0,1,21574,7,21597,0,0,,
+File_8=TSourceModule,'C:\Desenvolvimento\Projetos\vestispcp\Fontes\Core\Forms\Principal\FPrincipal.pas',0,1,1225,27,1231,0,0,,
 
 [Modules]
-Module0=C:\Users\user\Documents\GitHub\compiler\compilador.pas
-Module1=C:\Users\user\Documents\GitHub\compiler\ULexico.pas
-Module2=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
-Module3=default.htm
-Count=4
+Module0=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
+Module1=C:\Users\user\Documents\GitHub\compiler\compilador.pas
+Module2=C:\Users\user\Documents\GitHub\compiler\USintatico.pas
+Module3=C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas
+Module4=C:\Users\user\Documents\GitHub\compiler\ucompilador.dproj
+Module5=C:\Users\user\Documents\GitHub\compiler\ULexico.pas
+Module6=C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas
+Module7=C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas
+Module8=C:\Users\user\Documents\GitHub\compiler\UToken.pas
+Module9=default.htm
+Count=10
 EditWindowCount=1
+
+[C:\Users\user\Documents\GitHub\compiler\UConstants.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
 [C:\Users\user\Documents\GitHub\compiler\compilador.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
+[C:\Users\user\Documents\GitHub\compiler\USintatico.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Users\user\Documents\GitHub\compiler\ucompilador.dproj]
+ModuleType=TBaseProject
+
 [C:\Users\user\Documents\GitHub\compiler\ULexico.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Users\user\Documents\GitHub\compiler\UConstants.pas]
+[C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Users\user\Documents\GitHub\compiler\UToken.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -40,12 +70,18 @@ FormOnTop=0
 ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=4
-CurrentEditView=C:\Users\user\Documents\GitHub\compiler\compilador.pas
+ViewCount=10
+CurrentEditView=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
 View0=0
 View1=1
 View2=2
 View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
 PercentageSizes=1
 Create=1
 Visible=1
@@ -70,7 +106,7 @@ RightPanelClients=DockSite2
 RightPanelData=00000800010000000000800C00000000000000FE1C0000000000000100000000800C000009000000446F636B5369746532FFFFFFFF
 BottomPanelSize=1922
 BottomPanelClients=DockSite1,MessageView
-BottomPanelData=0000080001020100000009000000446F636B536974653172450000000000000282070000000000000100000000B922000009000000446F636B53697465310100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=0000080001020000000072450000000000000282070000000000000100000000B922000009000000446F636B53697465310100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001020100000009000000446F636B53697465304C1C000000000000029905000000000000FFFFFFFF
@@ -82,9 +118,9 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=C:\Users\user\Documents\GitHub\compiler\compilador.pas
-CursorX=12
-CursorY=210
-TopLine=172
+CursorX=42
+CursorY=199
+TopLine=184
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -92,21 +128,87 @@ EditViewName=C:\Users\user\Documents\GitHub\compiler\compilador.pas
 
 [View2]
 CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas
+CursorX=34
+CursorY=8
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas
+
+[View3]
+CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas
+CursorX=36
+CursorY=8
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas
+
+[View4]
+CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\USintatico.pas
+CursorX=1
+CursorY=114
+TopLine=89
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\USintatico.pas
+
+[View5]
+CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\UToken.pas
+CursorX=27
+CursorY=42
+TopLine=19
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\UToken.pas
+
+[View6]
+CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas
+CursorX=1
+CursorY=24
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas
+
+[View7]
+CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\ucompilador.dpr
+CursorX=1
+CursorY=13
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\ucompilador.dpr
+
+[View8]
+CustomEditViewType=TEditView
 Module=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
-CursorX=51
-CursorY=50
-TopLine=36
+CursorX=60
+CursorY=142
+TopLine=129
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\user\Documents\GitHub\compiler\UConstants.pas
 
-[View3]
+[View9]
 CustomEditViewType=TEditView
 Module=C:\Users\user\Documents\GitHub\compiler\ULexico.pas
-CursorX=41
-CursorY=32
-TopLine=22
+CursorX=26
+CursorY=14
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -138,9 +240,12 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=2
-Breakpoint0='C:\Users\user\Documents\GitHub\compiler\compilador.pas',117,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint1='C:\Users\user\Documents\GitHub\compiler\compilador.pas',199,'',0,1,'',1,0,0,'',1,'','','',0,''
+Count=5
+Breakpoint0='C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',24,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint1='C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',30,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint2='C:\Users\user\Documents\GitHub\compiler\USintatico.pas',50,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint3='C:\Users\user\Documents\GitHub\compiler\USintatico.pas',113,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint4='C:\Users\user\Documents\GitHub\compiler\USintatico.pas',73,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
@@ -163,14 +268,14 @@ Create=1
 Visible=1
 Docked=0
 State=2
-Left=12
-Top=12
-Width=6388
-Height=8442
+Left=138
+Top=267
+Width=8925
+Height=8523
 MaxLeft=-6
 MaxTop=-12
-MaxWidth=6388
-MaxHeight=8442
+MaxWidth=8925
+MaxHeight=8523
 ClientWidth=10000
 ClientHeight=9744
 BottomPanelSize=8711
@@ -202,13 +307,13 @@ Create=1
 Visible=1
 Docked=1
 State=0
-Left=0
+Left=800
 Top=23
-Width=10000
+Width=5000
 Height=1744
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=10000
+ClientWidth=5000
 ClientHeight=1744
 TBDockHeight=1744
 LRDockWidth=2769
@@ -374,6 +479,7 @@ Column0Width=145
 Column1Width=100
 Column2Width=115
 Column3Width=250
+Column4Width=250
 
 [LocalVarsWindow]
 PercentageSizes=1
@@ -484,7 +590,7 @@ Create=1
 Visible=0
 Docked=0
 State=0
-Left=-50
+Left=0
 Top=1000
 Width=4069
 Height=3558
@@ -593,7 +699,7 @@ HostDockSite=DockBottomPanel
 DockSiteType=1
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=1
 State=0
 Left=0

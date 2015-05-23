@@ -111,25 +111,16 @@ end;
 
 function Tfrmcompilador.econtralinha(posicao :integer): integer;
 var
- i,
- linha,
- soma  : Integer;
+ i, soma  : Integer;
 begin
   soma := 0;
-  linha := 0;
+  Result := 1;
   for i := 0 to synEditor.Lines.Count - 1 do
   begin
-    //caso linha seja incrementada garantir que o valor fique correto
-    linha := linha + i;
-    //caso seja linha em branco contar também
-    if Trim(synEditor.Lines[i]) = EmptyStr then
-      linha := linha + 1
-    else
-     soma := soma + Length(Trim(synEditor.Lines[i]));
-
-    if (posicao <= soma) then
+    soma := soma + Length(Trim(synEditor.Lines[i]));
+    if ((posicao - 1) <= soma) then
     begin
-     Result := linha;
+     Result := (i + 1);
      exit;
     end;
   end;
@@ -211,11 +202,11 @@ begin
     except
     on e : ELexicalError do
      begin
-       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(econtralinha(e.getPosition)));
+       synMensagens.Lines.Add('Erro na linha ' + IntToStr(econtralinha(e.getPosition)) + ' - ' + e.getMessage);
      end;
     on e : ESyntaticError do
      begin
-       synMensagens.Lines.Add(e.getMessage + ' ' + IntToStr(econtralinha(e.getPosition)));
+       synMensagens.Lines.Add('Erro na linha ' + IntToStr(econtralinha(e.getPosition)) + ' - ' + e.getMessage);
      end;
     on e : ESemanticError do
      begin
