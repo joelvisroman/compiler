@@ -1,2 +1,1 @@
-# Compilador - Parte 1/4
-implementação interface do compilador.
+﻿# Implementação de um compilador para disciplina de compiladores – Furb – Universidade de Blumenau

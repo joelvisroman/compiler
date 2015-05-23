@@ -53,14 +53,8 @@ type
     {procedures}
     procedure plAdicionaLinhasIniciais;
     procedure plCompilarPrograma;
-    {functions}
-    {Realiza analise lexica}
-    function flRetornaClasseToken(idToken: Integer) :string;
-    {Auxiliar para formatar as mensagens apresentadas}
-    function StrFormat(AText, Caracter: String; Size: Word): String;
     {Encontra linha}
-    function econtralinha(posicao: integer): integer;
-    function RemoveQuebraLinha(sString: string): string;
+    function flEcontralinha(posicao: integer): integer;
   public
     { Public declarations }
     vbArquivoModificado: Boolean;
@@ -109,7 +103,7 @@ begin
   synEditor.CopyToClipboard;
 end;
 
-function Tfrmcompilador.econtralinha(posicao :integer): integer;
+function Tfrmcompilador.flEcontralinha(posicao :integer): integer;
 var
  i, soma  : Integer;
 begin
@@ -118,7 +112,7 @@ begin
   for i := 0 to synEditor.Lines.Count - 1 do
   begin
     soma := soma + Length(Trim(synEditor.Lines[i]));
-    if ((posicao - 1) <= soma) then
+    if ((posicao - 1) <= soma) and (soma <> 0) then
     begin
      Result := (i + 1);
      exit;
@@ -129,27 +123,6 @@ end;
 procedure Tfrmcompilador.equipeExecute(Sender: TObject);
 begin
   synMensagens.Lines.Add('Joelvis Roman da Silva')
-end;
-
-function Tfrmcompilador.flRetornaClasseToken(idToken: Integer): string;
-var
- lsClasse: string;
-begin
-  lsClasse := EmptyStr;
-  case idToken of
-    2: lsClasse := 'identificador';
-    3,4,5,6,7,8,9,
-    10,11,12,13,14,15,16: lsClasse := 'palavra reservada';
-    17,18,19,20,21,22,23,
-    24,25,26,27,28,29,30,31,32: lsClasse := 'símbolo especial';
-    33: lsClasse := 'constante inteira';
-    34: lsClasse := 'constante binária';
-    35: lsClasse := 'constante hexadecimal';
-    36: lsClasse := 'constante real';
-    37: lsClasse := 'constante string';
-    38: lsClasse := 'constante caracter';
-  end;
-  Result := lsClasse;
 end;
 
 procedure Tfrmcompilador.FormCreate(Sender: TObject);
@@ -202,11 +175,11 @@ begin
     except
     on e : ELexicalError do
      begin
-       synMensagens.Lines.Add('Erro na linha ' + IntToStr(econtralinha(e.getPosition)) + ' - ' + e.getMessage);
+       synMensagens.Lines.Add('Erro na linha ' + IntToStr(flEcontralinha(e.getPosition)) + ' - ' + e.getMessage);
      end;
     on e : ESyntaticError do
      begin
-       synMensagens.Lines.Add('Erro na linha ' + IntToStr(econtralinha(e.getPosition)) + ' - ' + e.getMessage);
+       synMensagens.Lines.Add('Erro na linha ' + IntToStr(flEcontralinha(e.getPosition)) + ' - ' + e.getMessage);
      end;
     on e : ESemanticError do
      begin
@@ -221,21 +194,6 @@ end;
 procedure Tfrmcompilador.recortarExecute(Sender: TObject);
 begin
   synEditor.CutToClipboard;
-end;
-
-function Tfrmcompilador.RemoveQuebraLinha(sString: string): string;
-var i: Integer;
-    s: String;
-begin
-//  #13#10
-for i:=1 to Length(sString) do
-  begin
-  if (Copy(sString, i, 1) = chr(13)) or (Copy(sString, i, 1) = chr(10)) then
-    s:=s + ' '
-  else
-    s:=s + Copy(sString, i, 1);
-  end;
-Result:=s;
 end;
 
 procedure Tfrmcompilador.salvarExecute(Sender: TObject);
@@ -257,15 +215,6 @@ begin
      stBarra.Panels[0].text := 'Não modificado';
      synMensagens.Clear;
    end;
-end;
-
-function Tfrmcompilador.StrFormat(AText, Caracter: String; Size: Word): String;
-var
-  i: Integer;
-begin
-  Result := Copy(AText, 1, Size);
-  for i := Length(AText) to Size - 1 do
-    Result := Result + Caracter;
 end;
 
 procedure Tfrmcompilador.synEditorChange(Sender: TObject);
