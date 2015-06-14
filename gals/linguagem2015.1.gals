@@ -7,7 +7,7 @@ ParserName = Sintatico
 SemanticName = Semantico
 ScannerCaseSensitive = true
 ScannerTable = Full
-Input = String
+Input = Stream
 Parser = LL
 #RegularDefinitions
 lmai: [A-Z]
@@ -85,7 +85,6 @@ constante_caracter: (("#\") (space|newline|tab))
 <variavel>
 <lista_comandos>
 <comando>
-<atribuicao>
 <selecao>
 <alternativa>
 <comando1>
@@ -109,39 +108,39 @@ constante_caracter: (("#\") (space|newline|tab))
 <lista_identificadores1>
 <lista_comandos1>
 #Grammar
-<programa> ::= <declaracao> <funcao> "(" <corpo> ")";
+<programa> ::= #15 <declaracao> <funcao> #16 "(" <corpo> ")" #17;
 <declaracao> ::= define identificador "(" <parametros> ")" <declaracao> | î;
 <parametros> ::= "[" identificador <valor> "]" <parametros> | î;
 <constante_logica> ::= true | false;
 <valor> ::= <constante_logica> | constante_inteira | constante_binaria | constante_hexadec | constante_real | constante_string | constante_caracter;
 <funcao> ::= describe identificador "(" <relacao_parametros> ")" "(" <corpo> ")" <funcao> | î;
 <relacao_parametros> ::= <lista_identificadores> | î;
-<lista_identificadores> ::= identificador <lista_identificadores1>;
+<lista_identificadores> ::= identificador #24 <lista_identificadores1>;
 <corpo> ::= <lista_variaveis> <lista_comandos>;
 <lista_variaveis> ::= î | <variavel> <lista_variaveis>;
-<variavel> ::= let "[" <lista_identificadores> <valor> "]";
+<variavel> ::= let "[" <lista_identificadores> <valor> #25 "]";
 <lista_comandos> ::= <comando> <lista_comandos1>;
-<comando> ::= set "[" identificador <comando1> | <saida> | <selecao> | <repeticao> | <retorno>;
-<saida> ::= display "(" <expressao> ")";
-<selecao> ::= if "(" <expressao> ")" "(" <lista_comandos> ")" <alternativa> ;
-<alternativa> ::= î | "(" <lista_comandos> ")";
-<repeticao> ::= do "(" <lista_comandos> ")" "(" until <expressao> ")";
+<comando> ::= set "[" identificador #24 <comando1> | <saida> | <selecao> | <repeticao> | <retorno>;
+<saida> ::= display "(" <expressao> #14 ")";
+<selecao> ::= if "(" <expressao> ")" #28 "(" <lista_comandos> ")" <alternativa> #29 ;
+<alternativa> ::= î | #30 "(" <lista_comandos> ")";
+<repeticao> ::= #31 do "(" <lista_comandos> ")" "(" until <expressao> ")" #32;
 <retorno> ::= "^" <expressao>;
 <expressao> ::= <elemento> <expressao1>;
-<expressao1> ::= and <elemento> <expressao1> | or <elemento> <expressao1> | î;
-<elemento> ::= <relacional> | true | false | not <elemento>;
+<expressao1> ::= and <elemento> #18 <expressao1> | or <elemento> #19 <expressao1> | î;
+<elemento> ::= <relacional> | true #11 | false #12 | not <elemento> #13;
 <relacional> ::= <aritmetica> <relacional1>;
-<relacional1> ::= <operador_relacional> <aritmetica> |  î;
+<relacional1> ::= <operador_relacional> #9 <aritmetica> #10 |  î;
 <operador_relacional> ::= "==" | "<>" | "<" | "<=" | ">" | ">="; 
 <aritmetica> ::=  <termo> <aritmetica1>;
-<aritmetica1> ::= "+" <termo> <aritmetica1>| "-" <termo> <aritmetica1>| î;
+<aritmetica1> ::= "+" <termo> #1 <aritmetica1>| "-" <termo> #2 <aritmetica1>| î;
 <termo> ::= <fator> <termo1>;
-<termo1> ::= "*" <fator> <termo1> | "/" <fator> <termo1> | î;
-<fator> ::= identificador <fator1>  | constante_inteira | constante_binaria | constante_hexadec |constante_real | constante_string | constante_caracter | "(" <expressao> ")" | "+" <fator> | "-" <fator>;
-<fator1> ::= "(" <argumentos> ")" | î;
+<termo1> ::= "*" <fator> #3 <termo1> | "/" <fator> #4 <termo1> | î;
+<fator> ::= identificador #24 <fator1>  | constante_inteira #5 | constante_binaria #20 | constante_hexadec #21 |constante_real #6 | constante_string #23 | constante_caracter #22 | "(" <expressao> ")" | "+" <fator> #7 | "-" <fator> #8;
+<fator1> ::= "(" <argumentos> ")" | #33 î;
 <argumentos> ::= <lista_expressoes>| î;
 <lista_expressoes> ::= <expressao> <lista_expressoes1>;
 <lista_expressoes1> ::= "," <lista_expressoes> |  î;
 <lista_identificadores1> ::= î | "," <lista_identificadores>;
 <lista_comandos1> ::= î | <lista_comandos>;
-<comando1> ::= <expressao> "]" | read "]";
+<comando1> ::= <expressao> #26 "]" | read #27 "]";
