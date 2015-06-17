@@ -1,9 +1,9 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas',0,1,1,34,8,0,0,,
-File_1=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas',0,1,1,36,8,0,0,,
-File_2=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\USintatico.pas',0,1,89,1,114,0,0,,
-File_3=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UToken.pas',0,1,19,27,42,0,0,,
-File_4=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',0,1,1,1,24,0,0,,
+File_0=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',0,1,32,1,30,0,0,,
+File_1=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\USintatico.pas',0,1,1,1,15,0,0,,
+File_2=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\ULexicalError.pas',0,1,1,34,8,0,0,,
+File_3=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\USyntaticError.pas',0,1,1,36,8,0,0,,
+File_4=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UToken.pas',0,1,19,27,42,0,0,,
 File_5=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\UConstants.pas',0,1,129,60,142,0,0,,
 File_6=TSourceModule,'C:\Users\user\Documents\GitHub\compiler\ULexico.pas',0,1,1,26,14,0,0,,
 File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,21586,1,21611,0,0,,
@@ -16,10 +16,16 @@ File_13=TSourceModule,'C:\Desenvolvimento\Componentes\SynEdit-master\Source\SynT
 File_14=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\win\Winapi.Windows.pas',0,1,21574,7,21597,0,0,,
 
 [Modules]
-Module0=C:\Users\user\Documents\GitHub\compiler\compilador.pas
-Module1=default.htm
-Count=2
+Module0=C:\Users\user\Documents\GitHub\compiler\USemantico.pas
+Module1=C:\Users\user\Documents\GitHub\compiler\compilador.pas
+Module2=default.htm
+Count=3
 EditWindowCount=1
+
+[C:\Users\user\Documents\GitHub\compiler\USemantico.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
 [C:\Users\user\Documents\GitHub\compiler\compilador.pas]
 ModuleType=TSourceModule
@@ -30,10 +36,11 @@ FormOnTop=0
 ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=2
-CurrentEditView=C:\Users\user\Documents\GitHub\compiler\compilador.pas
+ViewCount=3
+CurrentEditView=C:\Users\user\Documents\GitHub\compiler\USemantico.pas
 View0=0
 View1=1
+View2=2
 PercentageSizes=1
 Create=1
 Visible=1
@@ -58,7 +65,7 @@ RightPanelClients=DockSite2
 RightPanelData=00000800010000000000800C00000000000000FE1C0000000000000100000000800C000009000000446F636B5369746532FFFFFFFF
 BottomPanelSize=1922
 BottomPanelClients=DockSite1,MessageView
-BottomPanelData=0000080001020000000072450000000000000282070000000000000100000000B922000009000000446F636B53697465310100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=000008000102010000000F0000004D65737361676556696577466F726D724500000000000002820700000000000001000000007245000009000000446F636B5369746531FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001020100000009000000446F636B53697465304C1C000000000000029905000000000000FFFFFFFF
@@ -70,13 +77,24 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=C:\Users\user\Documents\GitHub\compiler\compilador.pas
-CursorX=48
-CursorY=200
-TopLine=223
+CursorX=44
+CursorY=217
+TopLine=204
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\user\Documents\GitHub\compiler\compilador.pas
+
+[View2]
+CustomEditViewType=TEditView
+Module=C:\Users\user\Documents\GitHub\compiler\USemantico.pas
+CursorX=44
+CursorY=18
+TopLine=49
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\user\Documents\GitHub\compiler\USemantico.pas
 
 [Watches]
 Count=1
@@ -104,12 +122,7 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=5
-Breakpoint0='C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',24,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint1='C:\Users\user\Documents\GitHub\compiler\UAnalysisError.pas',30,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint2='C:\Users\user\Documents\GitHub\compiler\USintatico.pas',50,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint3='C:\Users\user\Documents\GitHub\compiler\USintatico.pas',113,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint4='C:\Users\user\Documents\GitHub\compiler\USintatico.pas',73,'',0,1,'',1,0,0,'',1,'','','',0,''
+Count=0
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
@@ -168,18 +181,18 @@ StayOnTop=0
 [MessageView]
 PercentageSizes=1
 Create=1
-Visible=1
+Visible=0
 Docked=1
 State=0
-Left=800
-Top=23
-Width=5000
-Height=1744
+Left=0
+Top=0
+Width=2769
+Height=1767
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=5000
-ClientHeight=1744
-TBDockHeight=1744
+ClientWidth=2769
+ClientHeight=1767
+TBDockHeight=1767
 LRDockWidth=2769
 Dockable=1
 StayOnTop=0
@@ -310,11 +323,11 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=4975
+Width=10000
 Height=1453
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=4975
+ClientWidth=10000
 ClientHeight=1453
 TBDockHeight=3360
 LRDockWidth=3625
@@ -567,11 +580,11 @@ Docked=1
 State=0
 Left=0
 Top=23
-Width=4975
+Width=10000
 Height=1744
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=4975
+ClientWidth=10000
 ClientHeight=1744
 TBDockHeight=1744
 LRDockWidth=2450
