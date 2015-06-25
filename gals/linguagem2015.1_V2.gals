@@ -137,7 +137,7 @@ constante_caracter: (("#\") (space|newline|tab))
 <termo> ::= <fator> <termo1>;
 <termo1> ::= "*" <fator> #3 <termo1> | "/" <fator> #4 <termo1> | î;
 <fator> ::= identificador #24 <fator1>  | constante_inteira #5 | constante_binaria #20 | constante_hexadec #21 |constante_real #6 | constante_string #23 | constante_caracter #22 | "(" <expressao> ")" | "+" <fator> #7 | "-" <fator> #8;
-<fator1> ::= "(" <argumentos> ")" | #33 î;
+<fator1> ::= "(" <argumentos> #41 ")" | #33 î;
 <argumentos> ::= <lista_expressoes>| î;
 <lista_expressoes> ::= <expressao> <lista_expressoes1>;
 <lista_expressoes1> ::= "," <lista_expressoes> |  î;
